@@ -1,8 +1,11 @@
+from typing import Dict
+from graphNode import GraphNode
+
 class GraphNode:
     Value = 0
-    Neighbors = {}
+    Neighbors: Dict[int, GraphNode] = {}
 
-    def __init__(self, value):
+    def __init__(self, value) -> None:
         self.Value = value
 
     def __str__(self) -> str:
@@ -10,7 +13,7 @@ class GraphNode:
         return strTemplate.format(self.Value, len(self.Neighbors))
     
     @classmethod
-    def AddNeighbor(self, neighbor) -> bool:
+    def AddNeighbor(self, neighbor: GraphNode) -> bool:
         if neighbor is not None and type(neighbor) is GraphNode:
             if neighbor.Value not in self.Neighbors:
                 self.Neighbors[neighbor.Value] = neighbor
@@ -18,7 +21,7 @@ class GraphNode:
         return False
     
     @classmethod
-    def RemoveNeighbor(self, neighbor) -> bool:
+    def RemoveNeighbor(self, neighbor: GraphNode) -> bool:
         if neighbor is not None and type(neighbor) is GraphNode:
             if neighbor.Value in self.Neighbors:
                 self.Neighbors.pop(neighbor.Value)
@@ -26,7 +29,7 @@ class GraphNode:
         return False
     
     @classmethod
-    def RemoveNeighbor(self, value) -> bool:
+    def RemoveNeighbor(self, value: int) -> bool:
         if value is not None and type(value) is int:
             if value in self.Neighbors:
                 self.Neighbors.pop(value)
@@ -34,13 +37,13 @@ class GraphNode:
         return False
 
     @classmethod
-    def HasNeighbor(self, neighbor) -> bool:
+    def HasNeighbor(self, neighbor: GraphNode) -> bool:
         if neighbor is not None and type(neighbor) is GraphNode:
             return neighbor.Value in self.Neighbors
         return False
 
     @classmethod
-    def HasNeighbor(self, value) -> bool:
+    def HasNeighbor(self, value: int) -> bool:
         if value is not None and type(value) is int:
             return value in self.Neighbors
         return False
