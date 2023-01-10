@@ -1,6 +1,6 @@
 from enum import Enum
 from graphNode import GraphNode
-from typing import Dict
+from typing import Dict, List
 
 class TraversalType(Enum):
     DepthFirst = 0,
@@ -54,5 +54,20 @@ class Graph:
         node2.RemoveNeighbor(node1)
         return True
         
-    #def PrintTraversal(rootValue: int, traversalType: TraversalType) -> str:
+    @classmethod
+    def PrintTraversal(self, rootValue: int, traversalType: TraversalType) -> str:
+        if rootValue is None or type(rootValue) is not int or traversalType is None or type(traversalType) is not TraversalType:
+            return None
+        if rootValue not in self.Nodes:
+            return None
+        rootNode = self.Nodes[rootValue]
+        results: List[str] = []
+        
+        if traversalType == TraversalType.BreadthFirst:
+            print("Got breadth first")
+        elif traversalType == TraversalType.DepthFirst:
+            print("Got depth first")
+        return ''.join(results)
+        
+    # def GetDepthFirst(self, rootNode: GraphNode) -> List[str]:
         
