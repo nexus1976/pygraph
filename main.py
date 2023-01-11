@@ -29,4 +29,4 @@ depthFirstResults = myGraph.PrintTraversal(0, TraversalType.DepthFirst)
 print(f'DFS: {depthFirstResults}\n')
 
 breadthFirstResults = myGraph.PrintTraversal(0, TraversalType.BreadthFirst)
-print(f'BDF: {breadthFirstResults}\n')
+print(f'BFS: {breadthFirstResults}\n')
