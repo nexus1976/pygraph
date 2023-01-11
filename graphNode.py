@@ -1,53 +1,53 @@
-from typing import Dict
-from graphNode import GraphNode
+from typing import Dict, List
+# from graphNode import GraphNode
 
 class GraphNode:
-    Value = 0
-    Neighbors: Dict[int, GraphNode] = {}
-
     def __init__(self, value) -> None:
-        self.Value = value
+        self._value = value
+        self._neighbors: Dict[int, GraphNode] = {}
 
     def __str__(self) -> str:
         strTemplate = "GraphNode Value: {0} | Neighbors Count: {1}"
-        return strTemplate.format(self.Value, len(self.Neighbors))
+        return strTemplate.format(self.Value, len(self._neighbors))
     
-    @classmethod
-    def AddNeighbor(self, neighbor: GraphNode) -> bool:
+    @property
+    def Neighbors(self) -> List['GraphNode']:
+        return self._neighbors.values()
+    
+    @property
+    def Value(self) -> int:
+        return self._value
+
+    def AddNeighbor(self, neighbor: 'GraphNode') -> bool:
         if neighbor is not None and type(neighbor) is GraphNode:
-            if neighbor.Value not in self.Neighbors:
-                self.Neighbors[neighbor.Value] = neighbor
+            if neighbor.Value not in self._neighbors:
+                self._neighbors[neighbor.Value] = neighbor
                 return True
         return False
     
-    @classmethod
-    def RemoveNeighbor(self, neighbor: GraphNode) -> bool:
+    def RemoveNeighbor(self, neighbor: 'GraphNode') -> bool:
         if neighbor is not None and type(neighbor) is GraphNode:
-            if neighbor.Value in self.Neighbors:
-                self.Neighbors.pop(neighbor.Value)
+            if neighbor.Value in self._neighbors:
+                self._neighbors.pop(neighbor.Value)
                 return True
         return False
     
-    @classmethod
     def RemoveNeighbor(self, value: int) -> bool:
         if value is not None and type(value) is int:
-            if value in self.Neighbors:
-                self.Neighbors.pop(value)
+            if value in self._neighbors:
+                self._neighbors.pop(value)
                 return True
         return False
 
-    @classmethod
-    def HasNeighbor(self, neighbor: GraphNode) -> bool:
+    def HasNeighbor(self, neighbor: 'GraphNode') -> bool:
         if neighbor is not None and type(neighbor) is GraphNode:
-            return neighbor.Value in self.Neighbors
+            return neighbor.Value in self._neighbors
         return False
 
-    @classmethod
     def HasNeighbor(self, value: int) -> bool:
         if value is not None and type(value) is int:
-            return value in self.Neighbors
+            return value in self._neighbors
         return False
 
-    @classmethod
     def ClearAllNeighbors(self) -> None:
-        self.Neighbors.clear()
+        self._neighbors.clear()
