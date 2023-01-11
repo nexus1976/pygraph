@@ -24,5 +24,9 @@ edges = [
     ( 7, 6 )]
 
 myGraph = BuildGraph(nodes, edges)
+
 depthFirstResults = myGraph.PrintTraversal(0, TraversalType.DepthFirst)
-print(depthFirstResults)
+print(f'DFS: {depthFirstResults}\n')
+
+breadthFirstResults = myGraph.PrintTraversal(0, TraversalType.BreadthFirst)
+print(f'BDF: {breadthFirstResults}\n')
